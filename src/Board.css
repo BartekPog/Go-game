@@ -1,0 +1,13 @@
+.Board{
+  background-color: #eee;
+  display: inline-block;
+  /* width:80%; */
+  margin:auto;
+  padding: 40px;
+}
+
+.Board-row{
+  display:flex;
+  flex-wrap:nowrap;
+  justify-content: center;
+}

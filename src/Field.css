@@ -1,0 +1,11 @@
+.Field{
+  background-color: lightgray;
+  display: inline-block;
+  margin: 0;
+  height: 20px;
+  width: 20px;
+}
+
+.Field-possible:hover{
+  background-color: gray;
+}
