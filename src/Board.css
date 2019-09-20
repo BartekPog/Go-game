@@ -1,9 +1,10 @@
 .Board{
-  background-color: #eee;
+  background-color: #555;
+  border-radius: 5%;
   display: inline-block;
   /* width:80%; */
   margin:auto;
-  padding: 40px;
+  padding: 8px;
 }
 
 .Board-row{

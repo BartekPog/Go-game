@@ -1,18 +1,29 @@
 .Field{
-  background-color: lightgray;
+  background-color: #555;
+  border-radius: 20%;
   display: inline-block;
+  height: 30px;
   margin: 0;
-  height: 20px;
-  width: 20px;
+  transition: all 300ms ease-out;
+  width: 30px;
+}
+
+.Field-taken{
+  border-radius: 100%;
+  position:relative;
+  transform: scale(0.9);
+
 }
 
 .Field-possible:hover{
-  background-color: gray;
+  background-color: #aca;
+  transition: all 100ms ease-in;
 }
+
 .Field-black{
-  background-color: black;
+  background-color: #111;
 }
 
 .Field-white{
-  background-color: white;
+  background-color: #eee;
 }
