@@ -9,3 +9,10 @@
 .Field-possible:hover{
   background-color: gray;
 }
+.Field-black{
+  background-color: black;
+}
+
+.Field-white{
+  background-color: white;
+}
