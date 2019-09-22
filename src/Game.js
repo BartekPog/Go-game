@@ -1,75 +1,6 @@
 import React from 'react';
 import Board from "./Board";
-
-function getGroupSurroundings(rowId, colId, checkedBoard, boardSize, boardArray){
-  let currentColor=boardArray[rowId][colId];
-  let surroundings=[];
-
-  let newBoard = JSON.parse(JSON.stringify(checkedBoard));
-  newBoard[rowId][colId]= true;
-
-  checkedBoard=newBoard;
-
-  if(((rowId+1)<boardSize) && (rowId+1>=0) && (checkedBoard[rowId+1][colId]===false)){
-    let checking = boardArray[rowId+1][colId];
-    if(checking===currentColor){
-      let newIteration = getGroupSurroundings(rowId+1, colId, checkedBoard, boardSize, boardArray);
-
-      checkedBoard = newIteration.checkedBoard;
-      surroundings.push(...newIteration.surroundings);
-    }
-    else{
-      surroundings.push(checking);
-    }
-  }
-
-  if(((rowId-1)<boardSize) && (rowId-1>=0) && (checkedBoard[rowId-1][colId]===false)){
-    let checking = boardArray[rowId-1][colId];
-    if(checking===currentColor){
-      let newIteration = getGroupSurroundings(rowId-1, colId, checkedBoard, boardSize, boardArray);
-
-      checkedBoard = newIteration.checkedBoard;
-      surroundings.push(...newIteration.surroundings);
-    }
-    else{
-      surroundings.push(checking);
-    }
-  }
-
-  if(((colId+1)<boardSize) && (colId+1>=0) && (checkedBoard[rowId][colId+1]===false)){
-    let checking = boardArray[rowId][colId+1];
-    if(checking===currentColor){
-      let newIteration = getGroupSurroundings(rowId, colId+1, checkedBoard, boardSize, boardArray);
-
-      checkedBoard = newIteration.checkedBoard;
-      surroundings.push(...newIteration.surroundings);
-    }
-    else
-      surroundings.push(checking);
-  }
-
-  if(((colId-1)<boardSize) && (colId-1>=0) && (checkedBoard[rowId][colId-1]===false)){
-    let checking = boardArray[rowId][colId-1];
-    if(checking===currentColor){
-        let newIteration = getGroupSurroundings(rowId, colId-1, checkedBoard, boardSize, boardArray);
-
-        checkedBoard = newIteration.checkedBoard;
-        surroundings.push(...newIteration.surroundings);
-    }
-    else
-      surroundings.push(checking);
-  }
-  surroundings=Array.from(new Set(surroundings));
-
-  return {
-    surroundings: surroundings,
-    checkedBoard: checkedBoard
-  };
-};
-
-function sumTwoSquareBoolArrays(arr1, arr2){
-  return arr1.map((row, rowId)=>row.map((elem, colId)=> (elem || arr2[rowId][colId])));
-}
+import {getGroupSurroundings, sumTwoSquareBoolArrays, isMovePossible} from "./gameMechanics";
 
 class Game extends React.Component{
   constructor(props){
@@ -106,7 +37,8 @@ class Game extends React.Component{
     let isCapture = false;
 
     //down
-    if((moveRowId+1<this.state.boardSize) && (this.state.board[moveRowId+1][moveColId]!=="none")){
+    if((moveRowId+1<this.state.boardSize)
+    && (this.state.board[moveRowId+1][moveColId]===this.state.player)){
       let groupSurroundingsPack = getGroupSurroundings(moveRowId+1, moveColId, emptyCheckBoard, this.state.boardSize, this.state.board);
 
       let groupSurroundings=groupSurroundingsPack.surroundings;
@@ -119,7 +51,8 @@ class Game extends React.Component{
     }
 
     //up
-    if((moveRowId-1>=0) && (this.state.board[moveRowId-1][moveColId]!=="none")){
+    if((moveRowId-1>=0)
+    && (this.state.board[moveRowId-1][moveColId]===this.state.player)){
       let groupSurroundingsPack = getGroupSurroundings(moveRowId-1, moveColId, emptyCheckBoard, this.state.boardSize, this.state.board);
 
       let groupSurroundings=groupSurroundingsPack.surroundings;
@@ -132,7 +65,8 @@ class Game extends React.Component{
     }
 
     //right
-    if((moveColId+1<this.state.boardSize) && (this.state.board[moveRowId][moveColId+1]!=="none")){
+    if((moveColId+1<this.state.boardSize)
+    && (this.state.board[moveRowId][moveColId+1]===this.state.player)){
       let groupSurroundingsPack = getGroupSurroundings(moveRowId, moveColId+1, emptyCheckBoard, this.state.boardSize, this.state.board);
 
       let groupSurroundings=groupSurroundingsPack.surroundings;
@@ -145,7 +79,8 @@ class Game extends React.Component{
     }
 
     //left
-    if((moveColId-1>=0) && (this.state.board[moveRowId][moveColId-1]!=="none")){
+    if((moveColId-1>=0)
+    && (this.state.board[moveRowId][moveColId-1]===this.state.player)){
       let groupSurroundingsPack = getGroupSurroundings(moveRowId, moveColId-1, emptyCheckBoard, this.state.boardSize, this.state.board);
 
       let groupSurroundings=groupSurroundingsPack.surroundings;
@@ -163,7 +98,8 @@ class Game extends React.Component{
   };
 
   makeMove(rowId, colId){
-    if(this.state.board[rowId][colId]==="none"){
+    if((this.state.board[rowId][colId]==="none")
+    && (isMovePossible(rowId, colId, this.state.board, this.state.player))){
       let stoneType = this.state.player;
       let newBoard=JSON.parse(JSON.stringify(this.state.board));
       newBoard[rowId][colId]=stoneType;
@@ -190,7 +126,7 @@ class Game extends React.Component{
   render() {
     return (
       <div className="Game">
-        <h1>current player incidator</h1>
+        <h1>current player incidator: {this.state.player}</h1>
         <h1>game board</h1>
         <Board
           board ={this.state.board}

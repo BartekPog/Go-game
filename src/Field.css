@@ -17,6 +17,7 @@
 
 .Field-possible:hover{
   background-color: #aca;
+  cursor: pointer;
   transition: all 100ms ease-in;
 }
 
