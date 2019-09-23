@@ -87,8 +87,8 @@ function isNotSuicidal(rowId, colId, boardArray, playerColor){
 
     //down
     if((rowId+1<boardSize)
-    && (board[rowId+1][rowId]===opponent(playerColor))){
-      let groupSurroundingsPack = getGroupSurroundings(rowId+1, rowId, emptyCheckBoard, boardSize, board);
+    && (board[rowId+1][colId]===opponent(playerColor))){
+      let groupSurroundingsPack = getGroupSurroundings(rowId+1, colId, emptyCheckBoard, boardSize, board);
 
       let groupSurroundings=groupSurroundingsPack.surroundings;
 
@@ -98,8 +98,8 @@ function isNotSuicidal(rowId, colId, boardArray, playerColor){
 
     //up
     if((rowId-1>=0)
-    && (board[rowId-1][rowId]===opponent(playerColor))){
-      let groupSurroundingsPack = getGroupSurroundings(rowId-1, rowId, emptyCheckBoard, boardSize, board);
+    && (board[rowId-1][colId]===opponent(playerColor))){
+      let groupSurroundingsPack = getGroupSurroundings(rowId-1, colId, emptyCheckBoard, boardSize, board);
 
       let groupSurroundings=groupSurroundingsPack.surroundings;
 
@@ -108,9 +108,9 @@ function isNotSuicidal(rowId, colId, boardArray, playerColor){
     }
 
     //right
-    if((rowId+1<boardSize)
-    && (board[rowId][rowId+1]===opponent(playerColor))){
-      let groupSurroundingsPack = getGroupSurroundings(rowId, rowId+1, emptyCheckBoard, boardSize, board);
+    if((colId+1<boardSize)
+    && (board[rowId][colId+1]===opponent(playerColor))){
+      let groupSurroundingsPack = getGroupSurroundings(rowId, colId+1, emptyCheckBoard, boardSize, board);
 
       let groupSurroundings=groupSurroundingsPack.surroundings;
 
@@ -119,9 +119,9 @@ function isNotSuicidal(rowId, colId, boardArray, playerColor){
     }
 
     //left
-    if((rowId-1>=0)
-    && (board[rowId][rowId-1]===opponent(playerColor))){
-      let groupSurroundingsPack = getGroupSurroundings(rowId, rowId-1, emptyCheckBoard, boardSize, board);
+    if((colId-1>=0)
+    && (board[rowId][colId-1]===opponent(playerColor))){
+      let groupSurroundingsPack = getGroupSurroundings(rowId, colId-1, emptyCheckBoard, boardSize, board);
 
       let groupSurroundings=groupSurroundingsPack.surroundings;
 
