@@ -72,7 +72,102 @@ function getGroupSurroundings(rowId, colId, checkedBoard, boardSize, boardArray)
   };
 };
 
-//function isKoValid
+function getCapturedOnes(rowId, colId, boardSize, boardArray, playerColor){
+  let emptyCheckBoard = Array(boardSize).fill(Array(boardSize).fill(false));
+  let capturedBoard = Array(boardSize).fill(Array(boardSize).fill(false));
+  let isCapture = false;
+
+  let board = JSON.parse(JSON.stringify(boardArray));
+
+  //down
+  if((rowId+1<boardSize)
+  && (board[rowId+1][colId]===opponent(playerColor))){
+    let groupSurroundingsPack = getGroupSurroundings(rowId+1, colId, emptyCheckBoard, boardSize, board);
+
+    // alert(JSON.stringify(groupSurroundingsPack));
+
+    let groupSurroundings=groupSurroundingsPack.surroundings;
+    let localCheckedBoard = groupSurroundingsPack.checkedBoard;
+
+    if (groupSurroundings.includes("none")===false){
+      isCapture=true;
+      capturedBoard=sumTwoSquareBoolArrays(capturedBoard, localCheckedBoard);
+    }
+  }
+
+  //up
+  if((rowId-1>=0)
+  && (board[rowId-1][colId]===opponent(playerColor))){
+    let groupSurroundingsPack = getGroupSurroundings(rowId-1, colId, emptyCheckBoard, boardSize, board);
+
+    let groupSurroundings=groupSurroundingsPack.surroundings;
+    let localCheckedBoard = groupSurroundingsPack.checkedBoard;
+
+    if (groupSurroundings.includes("none")===false){
+      isCapture=true;
+      capturedBoard=sumTwoSquareBoolArrays(capturedBoard, localCheckedBoard);
+    }
+  }
+
+  //right
+  if((colId+1<boardSize)
+  && (board[rowId][colId+1]===opponent(playerColor))){
+    let groupSurroundingsPack = getGroupSurroundings(rowId, colId+1, emptyCheckBoard, boardSize, board);
+
+    let groupSurroundings=groupSurroundingsPack.surroundings;
+    let localCheckedBoard = groupSurroundingsPack.checkedBoard;
+
+    if (groupSurroundings.includes("none")===false){
+      isCapture=true;
+      capturedBoard=sumTwoSquareBoolArrays(capturedBoard, localCheckedBoard);
+    }
+  }
+
+  //left
+  if((colId-1>=0)
+  && (board[rowId][colId-1]===opponent(playerColor))){
+    let groupSurroundingsPack = getGroupSurroundings(rowId, colId-1, emptyCheckBoard, boardSize, board);
+
+    let groupSurroundings=groupSurroundingsPack.surroundings;
+    let localCheckedBoard = groupSurroundingsPack.checkedBoard;
+
+    if (groupSurroundings.includes("none")===false){
+      isCapture=true;
+      capturedBoard=sumTwoSquareBoolArrays(capturedBoard, localCheckedBoard);
+    }
+  }
+
+  return({
+    isCapture: isCapture,
+    capturedBoard: capturedBoard
+  });
+
+};
+
+function isKoValid(rowId, colId, boardArray, boardHistory, playerColor){
+  let boardSize = boardArray.length;
+  let newBoard = JSON.parse(JSON.stringify(boardArray));
+  let history = JSON.parse(JSON.stringify(boardHistory));
+
+  newBoard[rowId][colId] = playerColor;
+
+  // alert(JSON.stringify(newBoard));
+
+  let capturedObj = getCapturedOnes(rowId, colId, boardSize, newBoard, playerColor);
+
+  // alert(JSON.stringify(capturedObj));
+
+  if (capturedObj.isCapture){
+    capturedObj.capturedBoard.forEach((row, captRowId) => row.forEach((elem, captColId)=>{
+      if(elem)
+        newBoard[captRowId][captColId]="none";
+    }))
+
+    return !(history.some( (histBoard) => ( JSON.stringify(histBoard)===JSON.stringify(newBoard) )));
+  }
+
+  return true;
+};
 
 function isNotSuicidal(rowId, colId, boardArray, playerColor){
   let boardSize = boardArray.length;
@@ -134,8 +229,12 @@ function isNotSuicidal(rowId, colId, boardArray, playerColor){
   return true;
 };
 
-function isMovePossible(rowId, colId, boardArray, playerColor){ //pastBoardArray
-  return isNotSuicidal(rowId, colId, boardArray, playerColor);
+function isMovePossible(rowId, colId, boardArray, boardHistory, playerColor){
+  return (
+    (isNotSuicidal(rowId, colId, boardArray, playerColor))
+    && (isKoValid(rowId, colId, boardArray, boardHistory, playerColor))
+  );
+
 };
 
 export {sumTwoSquareBoolArrays, getGroupSurroundings, opponent, isMovePossible};

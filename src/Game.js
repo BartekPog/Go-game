@@ -13,7 +13,8 @@ class Game extends React.Component{
       lastMove:{
         rowId: -1,
         colId: -1
-      }
+      },
+      boardHistory: []
     };
   };
 
@@ -99,7 +100,7 @@ class Game extends React.Component{
 
   makeMove(rowId, colId){
     if((this.state.board[rowId][colId]==="none")
-    && (isMovePossible(rowId, colId, this.state.board, this.state.player))){
+    && (isMovePossible(rowId, colId, this.state.board, this.state.boardHistory, this.state.player))){
       let stoneType = this.state.player;
       let newBoard=JSON.parse(JSON.stringify(this.state.board));
       newBoard[rowId][colId]=stoneType;
@@ -116,6 +117,7 @@ class Game extends React.Component{
       if(this.state.player==="black") newPlayer="white";
 
       this.setState({
+        boardHistory: [...this.state.boardHistory, this.state.board],
         board: newBoard,
         lastMove: newLastMove,
         player: newPlayer
