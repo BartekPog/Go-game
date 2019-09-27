@@ -22,7 +22,6 @@ class Game extends React.Component{
     if((this.state.board[rowId][colId]==="none")
     && (isMovePossible(rowId, colId, this.state.board, this.state.boardHistory, this.state.player))){
 
-
       let stoneType = this.state.player;
       let newBoard=JSON.parse(JSON.stringify(this.state.board));
       newBoard[rowId][colId]=stoneType;

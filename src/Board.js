@@ -22,9 +22,9 @@ function Board (props) {
   return(
     <div className = "Board">
       {props.board.map((row, rowId) =>(
-          <div className="Board-row"> {row.map((element, colId)=>(<Field
+          <div className="Board-row" key={rowId.toString()}> {row.map((element, colId)=>(<Field
             fieldType={element}
-            key={parseInt((props.boardSize+3)*rowId+colId)}
+            key={rowId.toString()+" "+colId.toString()}
             fieldConnections={getFieldConnections(rowId, colId, props.boardSize)}
             handleClick={() => props.handleClick(rowId, colId)}
           />))}</div>
