@@ -235,4 +235,60 @@ function isMovePossible(rowId, colId, boardArray, boardHistory, playerColor){
 
 };
 
-export {sumTwoSquareBoolArrays, getGroupSurroundings, opponent, isMovePossible, getCapturedOnes};
+function countPoints(boardArray){
+  let board = JSON.parse(JSON.stringify(boardArray));
+
+  let boardSize = board.length;
+  let blackPoints = 0;
+  let whitePoints = 0;
+
+  let checkedBoard = Array(boardSize).fill(Array(boardSize).fill(false));
+  let emptyCheckBoard = Array(boardSize).fill(Array(boardSize).fill(false));
+
+  board.forEach((row, rowId) => row.forEach((elem, colId) => {
+    if(elem === "black")
+      blackPoints++;
+    if(elem === "white")
+      whitePoints++;
+    else{
+      if(checkedBoard[rowId][colId] === false){
+        let groupSurroundingPack = getGroupSurroundings(rowId, colId, emptyCheckBoard, boardSize, board);
+
+        let localSurroundings = groupSurroundingPack.surroundings;
+        let localCheckedBoard = groupSurroundingPack.checkedBoard;
+
+        checkedBoard = sumTwoSquareBoolArrays(checkedBoard, localCheckedBoard);
+
+        //alert(JSON.stringify(groupSurroundingPack));
+
+        if (localSurroundings.length === 1){
+          // let groupPoints = localCheckedBoard.reduce((superSum, row) =>{
+          //   return superSum + row.reduce((sum, elem) =>{
+          //     return sum + (elem ? 1 : 0 );
+          //   })
+          // });
+
+          let groupPoints = 0;
+          for(let row = 0; row < boardSize; row++)
+            for(let col = 0; col < boardSize; col++)
+              groupPoints += (localCheckedBoard[row][col] ? 1 : 0);
+
+
+          //alert(groupPoints);
+
+          if(localSurroundings.includes("black"))
+            blackPoints += groupPoints;
+          else
+            whitePoints += groupPoints;
+        }
+      }
+    }
+  }));
+
+  return({
+    white: whitePoints,
+    black: blackPoints
+  });
+};
+
+export {sumTwoSquareBoolArrays, getGroupSurroundings, opponent, isMovePossible, getCapturedOnes, countPoints};
