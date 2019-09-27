@@ -1,6 +1,6 @@
 import React from 'react';
 import Board from "./Board";
-import {getGroupSurroundings, sumTwoSquareBoolArrays, isMovePossible} from "./gameMechanics";
+import {isMovePossible, getCapturedOnes} from "./gameMechanics";
 
 class Game extends React.Component{
   constructor(props){
@@ -18,92 +18,22 @@ class Game extends React.Component{
     };
   };
 
-  componentDidUpdate(){
-    this.captureIfPossible(this.state.lastMove.rowId, this.state.lastMove.colId);
-  }
-
-  removeGroup(groupArray){
-    this.setState({
-      board: this.state.board.map( (row, rowId) =>
-        row.map((field, colId) =>
-          (groupArray[rowId][colId] ? "none" : field)
-        )
-      )
-    })
-  };
-
-  captureIfPossible(moveRowId, moveColId){
-    let emptyCheckBoard = Array(this.state.boardSize).fill(Array(this.state.boardSize).fill(false));
-    let capturedBoard = Array(this.state.boardSize).fill(Array(this.state.boardSize).fill(false));
-    let isCapture = false;
-
-    //down
-    if((moveRowId+1<this.state.boardSize)
-    && (this.state.board[moveRowId+1][moveColId]===this.state.player)){
-      let groupSurroundingsPack = getGroupSurroundings(moveRowId+1, moveColId, emptyCheckBoard, this.state.boardSize, this.state.board);
-
-      let groupSurroundings=groupSurroundingsPack.surroundings;
-      let localCheckedBoard = groupSurroundingsPack.checkedBoard;
-
-      if (groupSurroundings.includes("none")===false){
-        isCapture=true;
-        capturedBoard=sumTwoSquareBoolArrays(capturedBoard, localCheckedBoard);
-      }
-    }
-
-    //up
-    if((moveRowId-1>=0)
-    && (this.state.board[moveRowId-1][moveColId]===this.state.player)){
-      let groupSurroundingsPack = getGroupSurroundings(moveRowId-1, moveColId, emptyCheckBoard, this.state.boardSize, this.state.board);
-
-      let groupSurroundings=groupSurroundingsPack.surroundings;
-      let localCheckedBoard = groupSurroundingsPack.checkedBoard;
-
-      if (groupSurroundings.includes("none")===false){
-        isCapture=true;
-        capturedBoard=sumTwoSquareBoolArrays(capturedBoard, localCheckedBoard);
-      }
-    }
-
-    //right
-    if((moveColId+1<this.state.boardSize)
-    && (this.state.board[moveRowId][moveColId+1]===this.state.player)){
-      let groupSurroundingsPack = getGroupSurroundings(moveRowId, moveColId+1, emptyCheckBoard, this.state.boardSize, this.state.board);
-
-      let groupSurroundings=groupSurroundingsPack.surroundings;
-      let localCheckedBoard = groupSurroundingsPack.checkedBoard;
-
-      if (groupSurroundings.includes("none")===false){
-        isCapture=true;
-        capturedBoard=sumTwoSquareBoolArrays(capturedBoard, localCheckedBoard);
-      }
-    }
-
-    //left
-    if((moveColId-1>=0)
-    && (this.state.board[moveRowId][moveColId-1]===this.state.player)){
-      let groupSurroundingsPack = getGroupSurroundings(moveRowId, moveColId-1, emptyCheckBoard, this.state.boardSize, this.state.board);
-
-      let groupSurroundings=groupSurroundingsPack.surroundings;
-      let localCheckedBoard = groupSurroundingsPack.checkedBoard;
-
-      if (groupSurroundings.includes("none")===false){
-        isCapture=true;
-        capturedBoard=sumTwoSquareBoolArrays(capturedBoard, localCheckedBoard);
-      }
-    }
-
-    if(isCapture)
-      this.removeGroup(capturedBoard);
-
-  };
-
   makeMove(rowId, colId){
     if((this.state.board[rowId][colId]==="none")
     && (isMovePossible(rowId, colId, this.state.board, this.state.boardHistory, this.state.player))){
+
+
       let stoneType = this.state.player;
       let newBoard=JSON.parse(JSON.stringify(this.state.board));
       newBoard[rowId][colId]=stoneType;
+
+      let capturedObj = getCapturedOnes(rowId, colId, newBoard.length, newBoard, stoneType);
+
+      if(capturedObj.isCapture)
+        newBoard = newBoard.map((row, rowId) => row.map((elem, colId) =>
+          (capturedObj.capturedBoard[rowId][colId]? "none":elem)
+        ));
+
       let newLastMove = this.state.lastMove;
 
       if(stoneType!=="none"){

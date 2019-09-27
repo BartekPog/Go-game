@@ -24,7 +24,7 @@ function Board (props) {
       {props.board.map((row, rowId) =>(
           <div className="Board-row"> {row.map((element, colId)=>(<Field
             fieldType={element}
-            key={props.boardSize*rowId+colId}
+            key={parseInt((props.boardSize+3)*rowId+colId)}
             fieldConnections={getFieldConnections(rowId, colId, props.boardSize)}
             handleClick={() => props.handleClick(rowId, colId)}
           />))}</div>

@@ -3,6 +3,8 @@ function sumTwoSquareBoolArrays(arr1, arr2){
 }
 
 function opponent(player){
+  if(player==="none")
+    return "none";
   return (player === "black" ? "white" : "black");
 };
 
@@ -10,17 +12,17 @@ function getGroupSurroundings(rowId, colId, checkedBoard, boardSize, boardArray)
   let currentColor=boardArray[rowId][colId];
   let surroundings=[];
 
-  let newBoard = JSON.parse(JSON.stringify(checkedBoard));
-  newBoard[rowId][colId]= true;
+  let newCheckedBoard = JSON.parse(JSON.stringify(checkedBoard));
+  newCheckedBoard[rowId][colId] = true;
 
-  checkedBoard=newBoard;
+  //let newCheckedBoard=newBoard;
 
-  if(((rowId+1)<boardSize) && (rowId+1>=0) && (checkedBoard[rowId+1][colId]===false)){
+  if(((rowId+1)<boardSize) && (rowId+1>=0) && (newCheckedBoard[rowId+1][colId]===false)){
     let checking = boardArray[rowId+1][colId];
     if(checking===currentColor){
-      let newIteration = getGroupSurroundings(rowId+1, colId, checkedBoard, boardSize, boardArray);
+      let newIteration = getGroupSurroundings(rowId+1, colId, newCheckedBoard, boardSize, boardArray);
 
-      checkedBoard = newIteration.checkedBoard;
+      newCheckedBoard = newIteration.checkedBoard;
       surroundings.push(...newIteration.surroundings);
     }
     else{
@@ -28,12 +30,12 @@ function getGroupSurroundings(rowId, colId, checkedBoard, boardSize, boardArray)
     }
   }
 
-  if(((rowId-1)<boardSize) && (rowId-1>=0) && (checkedBoard[rowId-1][colId]===false)){
+  if(((rowId-1)<boardSize) && (rowId-1>=0) && (newCheckedBoard[rowId-1][colId]===false)){
     let checking = boardArray[rowId-1][colId];
     if(checking===currentColor){
-      let newIteration = getGroupSurroundings(rowId-1, colId, checkedBoard, boardSize, boardArray);
+      let newIteration = getGroupSurroundings(rowId-1, colId, newCheckedBoard, boardSize, boardArray);
 
-      checkedBoard = newIteration.checkedBoard;
+      newCheckedBoard = newIteration.checkedBoard;
       surroundings.push(...newIteration.surroundings);
     }
     else{
@@ -41,24 +43,24 @@ function getGroupSurroundings(rowId, colId, checkedBoard, boardSize, boardArray)
     }
   }
 
-  if(((colId+1)<boardSize) && (colId+1>=0) && (checkedBoard[rowId][colId+1]===false)){
+  if(((colId+1)<boardSize) && (colId+1>=0) && (newCheckedBoard[rowId][colId+1]===false)){
     let checking = boardArray[rowId][colId+1];
     if(checking===currentColor){
-      let newIteration = getGroupSurroundings(rowId, colId+1, checkedBoard, boardSize, boardArray);
+      let newIteration = getGroupSurroundings(rowId, colId+1, newCheckedBoard, boardSize, boardArray);
 
-      checkedBoard = newIteration.checkedBoard;
+      newCheckedBoard = newIteration.checkedBoard;
       surroundings.push(...newIteration.surroundings);
     }
     else
       surroundings.push(checking);
   }
 
-  if(((colId-1)<boardSize) && (colId-1>=0) && (checkedBoard[rowId][colId-1]===false)){
+  if(((colId-1)<boardSize) && (colId-1>=0) && (newCheckedBoard[rowId][colId-1]===false)){
     let checking = boardArray[rowId][colId-1];
     if(checking===currentColor){
-        let newIteration = getGroupSurroundings(rowId, colId-1, checkedBoard, boardSize, boardArray);
+        let newIteration = getGroupSurroundings(rowId, colId-1, newCheckedBoard, boardSize, boardArray);
 
-        checkedBoard = newIteration.checkedBoard;
+        newCheckedBoard = newIteration.checkedBoard;
         surroundings.push(...newIteration.surroundings);
     }
     else
@@ -68,23 +70,24 @@ function getGroupSurroundings(rowId, colId, checkedBoard, boardSize, boardArray)
 
   return {
     surroundings: surroundings,
-    checkedBoard: checkedBoard
+    checkedBoard: newCheckedBoard
   };
 };
 
 function getCapturedOnes(rowId, colId, boardSize, boardArray, playerColor){
   let emptyCheckBoard = Array(boardSize).fill(Array(boardSize).fill(false));
   let capturedBoard = Array(boardSize).fill(Array(boardSize).fill(false));
+
   let isCapture = false;
 
   let board = JSON.parse(JSON.stringify(boardArray));
+
+  board[rowId][colId]=playerColor;
 
   //down
   if((rowId+1<boardSize)
   && (board[rowId+1][colId]===opponent(playerColor))){
     let groupSurroundingsPack = getGroupSurroundings(rowId+1, colId, emptyCheckBoard, boardSize, board);
-
-    // alert(JSON.stringify(groupSurroundingsPack));
 
     let groupSurroundings=groupSurroundingsPack.surroundings;
     let localCheckedBoard = groupSurroundingsPack.checkedBoard;
@@ -141,7 +144,6 @@ function getCapturedOnes(rowId, colId, boardSize, boardArray, playerColor){
     isCapture: isCapture,
     capturedBoard: capturedBoard
   });
-
 };
 
 function isKoValid(rowId, colId, boardArray, boardHistory, playerColor){
@@ -151,11 +153,7 @@ function isKoValid(rowId, colId, boardArray, boardHistory, playerColor){
 
   newBoard[rowId][colId] = playerColor;
 
-  // alert(JSON.stringify(newBoard));
-
   let capturedObj = getCapturedOnes(rowId, colId, boardSize, newBoard, playerColor);
-
-  // alert(JSON.stringify(capturedObj));
 
   if (capturedObj.isCapture){
     capturedObj.capturedBoard.forEach((row, captRowId) => row.forEach((elem, captColId)=>{
@@ -237,4 +235,4 @@ function isMovePossible(rowId, colId, boardArray, boardHistory, playerColor){
 
 };
 
-export {sumTwoSquareBoolArrays, getGroupSurroundings, opponent, isMovePossible};
+export {sumTwoSquareBoolArrays, getGroupSurroundings, opponent, isMovePossible, getCapturedOnes};
