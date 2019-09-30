@@ -1,5 +1,6 @@
 import React from "react";
 import Board from "./Board";
+import PassButton from "./PassButton";
 import {
   isMovePossible,
   getCapturedOnes,
@@ -11,12 +12,14 @@ class Game extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      stage: 1,
       player: "black",
-      boardSize: 9,
-      board: Array(9).fill(Array(9).fill("none")),
+      boardSize: this.props.boardSize,
+      board: Array(this.props.boardSize).fill(
+        Array(this.props.boardSize).fill("none")
+      ),
       boardHistory: [],
-      passCounter: 0
+      passCounter: 0,
+      win: false
     };
   }
 
@@ -64,10 +67,12 @@ class Game extends React.Component {
   }
 
   passMove() {
+    let isWin = this.state.passCounter >= 1;
     this.setState({
       boardHistory: [...this.state.boardHistory, this.state.board],
       player: opponent(this.state.player),
-      passCounter: this.state.passCounter + 1
+      passCounter: this.state.passCounter + 1,
+      isWin: isWin
     });
   }
 
@@ -82,13 +87,26 @@ class Game extends React.Component {
     return (
       <div className="Game">
         <h1>current player incidator: {this.state.player}</h1>
-        <h1>game board</h1>
         <Board
           board={this.state.board}
           boardSize={this.state.boardSize}
           handleClick={this.makeMove.bind(this)}
         />
-        <h1 onClick={this.passMove.bind(this)}>pass buttons</h1>
+
+        <PassButton
+          handleClick={this.passMove.bind(this)}
+          player={this.state.player}
+          color="black"
+        />
+        <PassButton
+          handleClick={this.passMove.bind(this)}
+          player={this.state.player}
+          color="white"
+        />
+        <h1>
+          {this.state.passCounter} {this.state.isWin ? "koniec gry" : ""}
+        </h1>
+
         <div>{scoreLabel}</div>
       </div>
     );
