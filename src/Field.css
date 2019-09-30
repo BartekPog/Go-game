@@ -1,4 +1,4 @@
-.Field{
+.Field {
   background-color: #555;
   border-radius: 20%;
   display: inline-block;
@@ -8,23 +8,22 @@
   width: 30px;
 }
 
-.Field-taken{
+.Field-taken {
   border-radius: 100%;
-  position:relative;
+  position: relative;
   transform: scale(0.9);
-
 }
 
-.Field-possible:hover{
+.Field-possible:hover {
   background-color: #aca;
   cursor: pointer;
   transition: all 100ms ease-in;
 }
 
-.Field-black{
+.Field-black {
   background-color: #111;
 }
 
-.Field-white{
+.Field-white {
   background-color: #eee;
 }
