@@ -55,7 +55,7 @@
 }
 
 .Menu-board-type:hover {
-  background-color: #4592af;
+  background-color: #aca;
   z-index: 2;
   cursor: pointer;
   transform: scale(1.04);

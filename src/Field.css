@@ -1,23 +1,43 @@
 .Field {
+  /* display: block; */
+
   background-color: #555;
+  opacity: 0.3;
+  /* padding-bottom: 100%; */
+  /* height: 0; */
   border-radius: 20%;
-  display: inline-block;
-  height: 30px;
   margin: 0;
-  transition: all 300ms ease-out;
-  width: 30px;
+
+  transition: all 400ms ease-out;
+  transform: scale(0.95);
+  flex-grow: 1;
+}
+
+.Field:before {
+  content: "";
+  display: block;
+  /* padding: 50%; */
+  height: 0;
+  padding-bottom: 100%;
+  /* padding-right: 100%; */
 }
 
 .Field-taken {
-  border-radius: 100%;
+  opacity: 1;
   position: relative;
+  z-index: 1;
+  border-radius: 100%;
   transform: scale(0.9);
+  transition: all 500ms ease-out;
 }
 
 .Field-possible:hover {
+  opacity: 1;
+  transform: scale(0.9);
+  border-radius: 25%;
   background-color: #aca;
   cursor: pointer;
-  transition: all 100ms ease-in;
+  transition: all 200ms ease-in;
 }
 
 .Field-black {
@@ -25,5 +45,5 @@
 }
 
 .Field-white {
-  background-color: #eee;
+  background-color: #e3c4a8;
 }
