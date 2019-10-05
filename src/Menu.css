@@ -1,0 +1,108 @@
+.Menu {
+  width: 100vw;
+  height: 100vh;
+
+  display: grid;
+  align-items: stretch;
+  align-content: stretch;
+  justify-items: stretch;
+  justify-content: stretch;
+
+  grid-template-columns: 2fr 2fr 2fr 2fr 2fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-areas:
+    "G-head label1 label1 label1 label1"
+    "G-head O-head label2 label2 label2"
+    "about O-head sel1 sel2 sel3";
+  grid-gap: 12px;
+
+  font-family: "Raleway", sans-serif;
+}
+
+.Menu-grid-elem {
+  border-radius: 26px;
+  align-items: center;
+}
+
+.Menu-GO {
+  background-color: #e3c4a8;
+  vertical-align: middle;
+  color: #33313b;
+  cursor: default;
+  max-height: 66vh;
+  overflow: hidden;
+}
+
+.Menu-logo-text {
+  line-height: 20%;
+  margin: 80% 0 0 0;
+  font-size: 40em;
+}
+
+.Menu-board-type {
+  position: relative;
+  background-color: #e3c4a8;
+  color: #33313b;
+  bottom: 0%;
+  font-size: 20em;
+  text-align: right;
+
+  border: none;
+  outline: none;
+  overflow: hidden;
+  transition: all 700ms ease-in-out;
+  z-index: 0;
+}
+
+.Menu-board-type:hover {
+  background-color: #4592af;
+  z-index: 2;
+  cursor: pointer;
+  transform: scale(1.04);
+  bottom: 5%;
+  transition: all 400ms ease-out;
+}
+
+.Menu-label1 {
+  grid-area: label1;
+
+  cursor: default;
+  align-items: center;
+  color: #e3c4a8;
+  margin-top: 2%;
+  font-size: 14em;
+  overflow: hidden;
+}
+
+.Menu-label2 {
+  grid-area: label2;
+
+  line-height: 79%;
+  cursor: default;
+  align-items: center;
+  color: #e3c4a8;
+  font-family: "Raleway", sans-serif;
+
+  font-size: 24em;
+  overflow: hidden;
+}
+
+.Menu-G {
+  grid-area: G-head;
+}
+
+.Menu-O {
+  grid-area: O-head;
+}
+
+.Menu-btn-1 {
+  grid-area: sel1;
+}
+
+.Menu-btn-2 {
+  grid-area: sel2;
+}
+
+.Menu-btn-3 {
+  grid-area: sel3;
+}

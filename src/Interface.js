@@ -1,6 +1,7 @@
 import React from "react";
 import Menu from "./Menu";
 import Game from "./Game";
+import "./interface.css";
 
 class Interface extends React.Component {
   constructor(props) {
@@ -27,7 +28,7 @@ class Interface extends React.Component {
     // if(this.state.interfaceType === "about")
     //     mainComponent = <About/>;
 
-    return mainComponent;
+    return <div className="Interface">{mainComponent}</div>;
   }
 }
 

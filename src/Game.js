@@ -19,54 +19,58 @@ class Game extends React.Component {
       ),
       boardHistory: [],
       passCounter: 0,
-      win: false
+      isWin: false
     };
   }
 
   makeMove(rowId, colId) {
-    if (
-      this.state.board[rowId][colId] === "none" &&
-      isMovePossible(
-        rowId,
-        colId,
-        this.state.board,
-        this.state.boardHistory,
-        this.state.player
-      )
-    ) {
-      let stoneType = this.state.player;
-      let newBoard = JSON.parse(JSON.stringify(this.state.board));
-      newBoard[rowId][colId] = stoneType;
+    if (this.state.isWin === false) {
+      if (
+        this.state.board[rowId][colId] === "none" &&
+        isMovePossible(
+          rowId,
+          colId,
+          this.state.board,
+          this.state.boardHistory,
+          this.state.player
+        )
+      ) {
+        let stoneType = this.state.player;
+        let newBoard = JSON.parse(JSON.stringify(this.state.board));
+        newBoard[rowId][colId] = stoneType;
 
-      let capturedObj = getCapturedOnes(
-        rowId,
-        colId,
-        newBoard.length,
-        newBoard,
-        stoneType
-      );
-
-      if (capturedObj.isCapture)
-        newBoard = newBoard.map((row, rowId) =>
-          row.map((elem, colId) =>
-            capturedObj.capturedBoard[rowId][colId] ? "none" : elem
-          )
+        let capturedObj = getCapturedOnes(
+          rowId,
+          colId,
+          newBoard.length,
+          newBoard,
+          stoneType
         );
 
-      let newPlayer = "none";
-      if (this.state.player === "white") newPlayer = "black";
-      if (this.state.player === "black") newPlayer = "white";
+        if (capturedObj.isCapture)
+          newBoard = newBoard.map((row, rowId) =>
+            row.map((elem, colId) =>
+              capturedObj.capturedBoard[rowId][colId] ? "none" : elem
+            )
+          );
 
-      this.setState({
-        boardHistory: [...this.state.boardHistory, this.state.board],
-        board: newBoard,
-        player: newPlayer,
-        passCounter: 0
-      });
+        let newPlayer = "none";
+        if (this.state.player === "white") newPlayer = "black";
+        if (this.state.player === "black") newPlayer = "white";
+
+        this.setState({
+          boardHistory: [...this.state.boardHistory, this.state.board],
+          board: newBoard,
+          player: newPlayer,
+          passCounter: 0
+        });
+      }
     }
   }
 
   passMove() {
+    if (this.state.isWin === false) {
+    }
     let isWin = this.state.passCounter >= 1;
     this.setState({
       boardHistory: [...this.state.boardHistory, this.state.board],
