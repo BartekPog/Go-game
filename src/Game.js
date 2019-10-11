@@ -93,10 +93,10 @@ class Game extends React.Component {
     return (
       <div className="Game">
         {/* <h1>current player incidator: {this.state.player}</h1> */}
-        <div
+        {/* <div
           className={
             "Game-player Game-player-black" +
-            (this.state.player === "black" ? " Game-player-active" : "")
+            (this.state.player === "black" ? " Game-play<er-active" : "")
           }
         ></div>
         <div
@@ -104,7 +104,23 @@ class Game extends React.Component {
             "Game-player Game-player-white" +
             (this.state.player === "white" ? " Game-player-active" : "")
           }
-        ></div>
+        ></div> */}
+
+        <div className="Game-pass Game-pass-black">
+          <PassButton
+            handleClick={this.passMove.bind(this)}
+            player={this.state.player}
+            color="black"
+          />
+        </div>
+        <div className="Game-pass Game-pass-white">
+          <PassButton
+            handleClick={this.passMove.bind(this)}
+            player={this.state.player}
+            color="white"
+          />
+        </div>
+
         <div className="Game-board">
           <Board
             board={this.state.board}
@@ -112,17 +128,6 @@ class Game extends React.Component {
             handleClick={this.makeMove.bind(this)}
           />
         </div>
-
-        <PassButton
-          handleClick={this.passMove.bind(this)}
-          player={this.state.player}
-          color="black"
-        />
-        <PassButton
-          handleClick={this.passMove.bind(this)}
-          player={this.state.player}
-          color="white"
-        />
 
         <h1>
           {this.state.passCounter} {this.state.isWin ? "koniec gry" : ""}

@@ -1,0 +1,59 @@
+.PassButton {
+  margin: auto;
+  vertical-align: bottom;
+
+  outline: none;
+  border: none;
+
+  width: 80%;
+  padding-top: 80%;
+  border-radius: 50%;
+
+  position: relative;
+  transform: scale(0.6);
+  transition: all 700ms ease-in-out;
+
+  overflow: hidden;
+}
+
+.PassButton-pass-content {
+  position: absolute;
+
+  font-size: 5.5rem;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+
+  padding-top: 36%;
+
+  opacity: 0;
+  transition: all 700ms ease-in-out;
+}
+
+.PassButton-active:hover .PassButton-pass-content {
+  opacity: 0.7;
+}
+
+.PassButton-active {
+  transform: scale(1);
+  box-shadow: 0px 0px 35px #e78267;
+}
+
+.PassButton-active:hover {
+  cursor: pointer;
+  box-shadow: 0px 0px 55px #e78267;
+  opacity: 0.9;
+}
+
+.PassButton-black {
+  color: #e3c4a8;
+  grid-area: black-player;
+  background-color: #111;
+}
+
+.PassButton-white {
+  color: #111;
+  grid-area: white-player;
+  background-color: #e3c4a8;
+}

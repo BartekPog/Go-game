@@ -1,13 +1,14 @@
 import React from "react";
+import "./PassButton.css";
 
 function Passbutton(props) {
-  let classNames = "Pass-button";
+  let classNames = "PassButton";
   let isActive = false;
 
-  if (props.color === "black") classNames += " Pass-button-black";
-  if (props.color === "white") classNames += " Pass-button-white";
+  if (props.color === "black") classNames += " PassButton-black";
+  if (props.color === "white") classNames += " PassButton-white";
   if (props.color === props.player) {
-    classNames += "Pass-button-active";
+    classNames += " PassButton-active";
     isActive = true;
   }
 
@@ -18,7 +19,7 @@ function Passbutton(props) {
         if (isActive) props.handleClick();
       }}
     >
-      Pass
+      <div className="PassButton-pass-content">Pass</div>
     </button>
   );
 }
