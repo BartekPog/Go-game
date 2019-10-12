@@ -31,6 +31,10 @@
   transition: all 700ms ease-in-out;
 }
 
+.PassButton-active .PassButton-pass-content {
+  opacity: 0.1;
+}
+
 .PassButton-active:hover .PassButton-pass-content {
   opacity: 0.7;
 }
@@ -42,7 +46,7 @@
 
 .PassButton-active:hover {
   cursor: pointer;
-  box-shadow: 0px 0px 55px #e78267;
+  box-shadow: 0px 0px 5 5px #e78267;
   opacity: 0.9;
 }
 

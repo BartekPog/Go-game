@@ -1,10 +1,6 @@
 .Field {
-  /* display: block; */
-
   background-color: #555;
   opacity: 0.3;
-  /* padding-bottom: 100%; */
-  /* height: 0; */
   border-radius: 20%;
   margin: 0;
 
@@ -16,10 +12,8 @@
 .Field:before {
   content: "";
   display: block;
-  /* padding: 50%; */
   height: 0;
   padding-bottom: 100%;
-  /* padding-right: 100%; */
 }
 
 .Field-taken {

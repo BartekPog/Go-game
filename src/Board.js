@@ -33,6 +33,7 @@ function Board(props) {
                 props.boardSize
               )}
               handleClick={() => props.handleClick(rowId, colId)}
+              handleHover={() => props.handleFieldHover(rowId, colId)}
             />
           ))}
         </div>

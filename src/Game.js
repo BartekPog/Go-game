@@ -9,6 +9,7 @@ import {
   countPoints,
   opponent
 } from "./gameMechanics";
+import { log } from "util";
 
 class Game extends React.Component {
   constructor(props) {
@@ -92,20 +93,6 @@ class Game extends React.Component {
 
     return (
       <div className="Game">
-        {/* <h1>current player incidator: {this.state.player}</h1> */}
-        {/* <div
-          className={
-            "Game-player Game-player-black" +
-            (this.state.player === "black" ? " Game-play<er-active" : "")
-          }
-        ></div>
-        <div
-          className={
-            "Game-player Game-player-white" +
-            (this.state.player === "white" ? " Game-player-active" : "")
-          }
-        ></div> */}
-
         <div className="Game-pass Game-pass-black">
           <PassButton
             handleClick={this.passMove.bind(this)}
@@ -126,14 +113,22 @@ class Game extends React.Component {
             board={this.state.board}
             boardSize={this.state.boardSize}
             handleClick={this.makeMove.bind(this)}
+            handleFieldHover={(rowId, colId) => {
+              return isMovePossible(
+                rowId,
+                colId,
+                this.state.board,
+                this.state.boardHistory,
+                this.state.player
+              );
+              // console.log(rowId, colId, this.state.player);
+            }}
           />
         </div>
 
         <h1>
           {this.state.passCounter} {this.state.isWin ? "koniec gry" : ""}
         </h1>
-
-        <div>{scoreLabel}</div>
       </div>
     );
   }
