@@ -14,9 +14,10 @@
   transition: all 700ms ease-in-out;
 
   overflow: hidden;
+  box-shadow: 0px 2px 14px #111;
 }
 
-.PassButton-pass-content {
+.PassButton-content {
   position: absolute;
 
   font-size: 5.5rem;
@@ -28,25 +29,47 @@
   padding-top: 36%;
 
   opacity: 0;
-  transition: all 700ms ease-in-out;
+  transition: inherit;
 }
 
-.PassButton-active .PassButton-pass-content {
+.PassButton-finished {
+}
+
+.PassButton-winner {
+  transform: scale(1.1);
+  /* box-shadow: inset 0px 0px 55px #aca; */
+}
+
+.PassButton-looser {
+  transform: scale(0.6);
+  /* box-shadow: inset 0px 0px 35px #e78267; */
+}
+
+.PassButton-finished .PassButton-content {
+  animation-timing-function: ease-in-out;
+  animation: text-fade-in 700ms 1;
+  opacity: 0.8;
+}
+
+.PassButton-active .PassButton-content {
   opacity: 0.1;
 }
 
-.PassButton-active:hover .PassButton-pass-content {
+.PassButton-active:hover .PassButton-content {
   opacity: 0.7;
 }
 
 .PassButton-active {
+  transition: all 700ms ease-in-out;
+
   transform: scale(1);
-  box-shadow: 0px 0px 35px #e78267;
+  box-shadow: 0px 0px 35px #aca;
 }
 
 .PassButton-active:hover {
+  transition: all 300ms ease-in-out;
   cursor: pointer;
-  box-shadow: 0px 0px 5 5px #e78267;
+  box-shadow: 0px 0px 55px #e78267;
   opacity: 0.9;
 }
 
@@ -60,4 +83,15 @@
   color: #111;
   grid-area: white-player;
   background-color: #e3c4a8;
+}
+
+@keyframes text-fade-in {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 0.7;
+  }
 }

@@ -9,7 +9,6 @@ import {
   countPoints,
   opponent
 } from "./gameMechanics";
-import { log } from "util";
 
 class Game extends React.Component {
   constructor(props) {
@@ -22,7 +21,10 @@ class Game extends React.Component {
       ),
       boardHistory: [],
       passCounter: 0,
-      isWin: false
+      isWin: false,
+      winner: "none",
+      blackScore: 0,
+      whiteScore: 0
     };
   }
 
@@ -73,31 +75,39 @@ class Game extends React.Component {
 
   passMove() {
     if (this.state.isWin === false) {
+      let isWin = this.state.passCounter >= 1;
+      this.setState({
+        boardHistory: [...this.state.boardHistory, this.state.board],
+        player: isWin ? "none" : opponent(this.state.player),
+        passCounter: this.state.passCounter + 1,
+        isWin: isWin
+      });
+      if (isWin) {
+        let score = countPoints(this.state.board);
+        let winner = score.black - score.white - 6.5 > 0 ? "black" : "white";
+        this.setState({
+          winner: winner,
+          whiteScore: score.white + 6.5,
+          blackScore: score.black
+        });
+      }
     }
-    let isWin = this.state.passCounter >= 1;
-    this.setState({
-      boardHistory: [...this.state.boardHistory, this.state.board],
-      player: opponent(this.state.player),
-      passCounter: this.state.passCounter + 1,
-      isWin: isWin
-    });
   }
 
   render() {
-    let score = countPoints(this.state.board);
-    let scoreLabel =
-      "black: " +
-      score.black.toString() +
-      ", white: " +
-      (score.white + 6.5).toString();
+    let gameClasses = "Game";
+    if (this.state.isWin === true)
+      gameClasses += " Game-" + this.state.winner + "-won";
 
     return (
-      <div className="Game">
+      <div className={gameClasses}>
         <div className="Game-pass Game-pass-black">
           <PassButton
             handleClick={this.passMove.bind(this)}
             player={this.state.player}
             color="black"
+            winner={this.state.winner}
+            score={this.state.blackScore}
           />
         </div>
         <div className="Game-pass Game-pass-white">
@@ -105,10 +115,14 @@ class Game extends React.Component {
             handleClick={this.passMove.bind(this)}
             player={this.state.player}
             color="white"
+            winner={this.state.winner}
+            score={this.state.whiteScore}
           />
         </div>
 
-        <div className="Game-board">
+        <div
+          className={"Game-board" + (this.state.isWin ? " Game-board-win" : "")}
+        >
           <Board
             board={this.state.board}
             boardSize={this.state.boardSize}
@@ -121,14 +135,9 @@ class Game extends React.Component {
                 this.state.boardHistory,
                 this.state.player
               );
-              // console.log(rowId, colId, this.state.player);
             }}
           />
         </div>
-
-        <h1>
-          {this.state.passCounter} {this.state.isWin ? "koniec gry" : ""}
-        </h1>
       </div>
     );
   }

@@ -4,14 +4,25 @@
 
   animation-timing-function: ease-out;
   animation: fade-in 700ms 1;
+  transition: all 700ms ease-in-out;
 
   display: grid;
   align-items: center;
   justify-items: center;
 
   grid-template-rows: 100%;
-  grid-template-columns: 1fr 2fr 1fr;
   grid-template-areas: "black-player board white-player";
+  grid-template-columns: 1fr 2fr 1fr;
+}
+
+.Game-black-won {
+  background-color: #222;
+  background-blend-mode: darken;
+}
+
+.Game-white-won {
+  background-color: #d3b296;
+  background-blend-mode: darken;
 }
 
 .Game-board {
@@ -19,13 +30,20 @@
   height: 100%;
   width: 100%;
   padding-top: 15%;
+
+  transition: all 700ms ease-in-out;
+  position: relative;
 }
 
-.Game-board::after {
+.Game-board-win {
+  transform: scale(0.93);
+}
+
+/* .Game-board::after {
   content: "";
   display: block;
   padding: 50%;
-}
+} */
 
 .Game-pass {
   width: 100%;
