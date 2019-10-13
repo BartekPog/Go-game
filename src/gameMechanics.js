@@ -24,8 +24,6 @@ function getGroupSurroundings(
   let newCheckedBoard = JSON.parse(JSON.stringify(checkedBoard));
   newCheckedBoard[rowId][colId] = true;
 
-  // let newCheckedBoard=newBoard;
-
   if (
     rowId + 1 < boardSize &&
     rowId + 1 >= 0 &&
@@ -354,6 +352,7 @@ function isMovePossible(rowId, colId, boardArray, boardHistory, playerColor) {
 }
 
 function countPoints(boardArray) {
+  let handicap = 6.5;
   const board = JSON.parse(JSON.stringify(boardArray));
 
   const boardSize = board.length;
@@ -394,7 +393,7 @@ function countPoints(boardArray) {
 
           if (localSurroundings.includes("black")) {
             blackPoints += groupPoints;
-          } else {
+          } else if (localSurroundings.includes("white")) {
             whitePoints += groupPoints;
           }
         }
@@ -403,7 +402,7 @@ function countPoints(boardArray) {
   );
 
   return {
-    white: whitePoints,
+    white: whitePoints + handicap,
     black: blackPoints
   };
 }

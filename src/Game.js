@@ -84,10 +84,10 @@ class Game extends React.Component {
       });
       if (isWin) {
         let score = countPoints(this.state.board);
-        let winner = score.black - score.white - 6.5 > 0 ? "black" : "white";
+        let winner = score.black - score.white > 0 ? "black" : "white";
         this.setState({
           winner: winner,
-          whiteScore: score.white + 6.5,
+          whiteScore: score.white,
           blackScore: score.black
         });
       }

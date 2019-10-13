@@ -7,7 +7,7 @@ class Interface extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      interfaceType: "game",
+      interfaceType: "menu",
       boardSize: 9
     };
   }
