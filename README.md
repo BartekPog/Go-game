@@ -1,6 +1,6 @@
 # GO
 
-This is a website dedicated to play GO game locally. You can acces it [here](https://bartekpog.github.io/Go-game/)
+This is a website dedicated to play GO game locally. You can acces it [here](https://bartekpog.github.io/Go-game/).
 
 ### What is go?
 
@@ -17,6 +17,7 @@ This project was created due to lack of proper GO online platform on chineese ru
 - [x] Add main game mechanics
 - [x] Finish styling for desktop
 - [ ] Finish styling for mobile devices
+- [ ] Add custom favicon
 - [ ] Add capturing gifs to readme
 - [ ] Add tests for game mechanics
 - [ ] Add visualisation of conquered fields in game results screen
