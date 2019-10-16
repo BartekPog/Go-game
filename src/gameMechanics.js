@@ -352,7 +352,7 @@ function isMovePossible(rowId, colId, boardArray, boardHistory, playerColor) {
 }
 
 function countPoints(boardArray) {
-  let handicap = 6.5;
+  let handicap = 7.5;
   const board = JSON.parse(JSON.stringify(boardArray));
 
   const boardSize = board.length;

@@ -32,17 +32,12 @@
   transition: inherit;
 }
 
-.PassButton-finished {
-}
-
 .PassButton-winner {
   transform: scale(1.1);
-  /* box-shadow: inset 0px 0px 55px #aca; */
 }
 
 .PassButton-looser {
   transform: scale(0.6);
-  /* box-shadow: inset 0px 0px 35px #e78267; */
 }
 
 .PassButton-finished .PassButton-content {
