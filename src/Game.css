@@ -39,12 +39,6 @@
   transform: scale(0.93);
 }
 
-/* .Game-board::after {
-  content: "";
-  display: block;
-  padding: 50%;
-} */
-
 .Game-pass {
   width: 100%;
   height: 100%;

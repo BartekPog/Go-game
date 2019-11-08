@@ -1,6 +1,8 @@
-import React from "react";
+import React, { Fragment } from "react";
 import Menu from "./Menu";
+import MenuMobile from "./MenuMobile";
 import Game from "./Game";
+import Media from "react-media";
 import "./interface.css";
 
 class Interface extends React.Component {
@@ -20,7 +22,30 @@ class Interface extends React.Component {
   }
 
   render() {
-    let mainComponent = <Menu handleChoice={this.handleChoice.bind(this)} />;
+    // let mainComponent = <Menu handleChoice={this.handleChoice.bind(this)} />;
+    let mainComponent = (
+      <Media
+        queries={{
+          small: "(max-width: 599px)",
+          medium: "(min-width: 600px) and (max-width: 1199px)",
+          large: "(min-width: 1200px)"
+        }}
+      >
+        {matches => (
+          <Fragment>
+            {matches.small && (
+              <MenuMobile handleChoice={this.handleChoice.bind(this)} />
+            )}
+            {matches.medium && (
+              <MenuMobile handleChoice={this.handleChoice.bind(this)} />
+            )}
+            {matches.large && (
+              <Menu handleChoice={this.handleChoice.bind(this)} />
+            )}
+          </Fragment>
+        )}
+      </Media>
+    );
 
     if (this.state.interfaceType === "game")
       mainComponent = <Game boardSize={this.state.boardSize} />;
