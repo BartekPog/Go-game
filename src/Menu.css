@@ -110,6 +110,22 @@
   grid-area: sel3;
 }
 
+@media (max-width: 1700px) {
+  .Menu-logo-text {
+    font-size: 34em;
+  }
+
+  .Menu-board-type {
+    font-size: 15em;
+  }
+  .Menu-label1 {
+    font-size: 9em;
+  }
+  .Menu-label2 {
+    font-size: 18em;
+  }
+}
+
 @keyframes fade-in {
   from {
     transform: scale(0.95);
