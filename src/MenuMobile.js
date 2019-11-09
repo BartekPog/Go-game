@@ -4,7 +4,7 @@ import "./MenuMobile.css";
 function MenuMobile(props) {
   return (
     <div className="MenuMobile">
-      <h1 className="GO-header">GO</h1>
+      <h1 className="MenuMobile-GO-header">GO</h1>
       <div className="MenuMobile-board-types-box">
         <button
           className="MenuMobile-board-type"
@@ -17,7 +17,7 @@ function MenuMobile(props) {
         <button
           className="MenuMobile-board-type"
           onClick={() => {
-            props.handleChoice(9);
+            props.handleChoice(13);
           }}
         >
           13
@@ -25,7 +25,7 @@ function MenuMobile(props) {
         <button
           className="MenuMobile-board-type"
           onClick={() => {
-            props.handleChoice(9);
+            props.handleChoice(19);
           }}
         >
           19

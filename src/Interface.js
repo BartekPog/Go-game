@@ -27,8 +27,8 @@ class Interface extends React.Component {
       <Media
         queries={{
           small: "(max-width: 599px)",
-          medium: "(min-width: 600px) and (max-width: 1199px)",
-          large: "(min-width: 1200px)"
+          medium: "(min-width: 600px) and (max-width: 1299px)",
+          large: "(min-width: 1300px)"
         }}
       >
         {matches => (

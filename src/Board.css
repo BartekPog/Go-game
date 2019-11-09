@@ -23,9 +23,26 @@
 
 .Board-row {
   flex-grow: 1;
-  /* background-color: blue; */
-  /* height: 10%; */
   display: flex;
   flex-wrap: nowrap;
   justify-content: center;
+}
+
+@media (min-width: 650px) and (max-width: 1300px) {
+  .Board {
+    transform-origin: top;
+    transform: scale(0.55);
+    margin: 15vw auto 10%;
+  }
+}
+@media (min-width: 950px) and (max-width: 1300px) {
+  .Board {
+    transform: scale(0.55);
+  }
+}
+
+@media (min-width: 650px) and (max-width: 949px) {
+  .Board {
+    transform: scale(0.75);
+  }
 }

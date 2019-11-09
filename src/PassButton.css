@@ -1,6 +1,7 @@
 .PassButton {
   margin: auto;
   vertical-align: bottom;
+  line-height: 0;
 
   outline: none;
   border: none;
@@ -26,7 +27,7 @@
   bottom: 0;
   right: 0;
 
-  padding-top: 36%;
+  padding-top: 50%;
 
   opacity: 0;
   transition: inherit;
@@ -78,6 +79,22 @@
   color: #111;
   grid-area: white-player;
   background-color: #e3c4a8;
+}
+
+@media (min-width: 650px) and (max-width: 1100px) {
+  .PassButton {
+    width: 40%;
+    padding-top: 40%;
+  }
+  .PassButton-content {
+    font-size: 3rem;
+  }
+}
+
+@media (max-width: 650px) {
+  .PassButton-content {
+    font-size: 2rem;
+  }
 }
 
 @keyframes text-fade-in {

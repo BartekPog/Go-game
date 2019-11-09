@@ -1,7 +1,7 @@
 .MenuMobile {
   margin: 0;
   overflow: hidden;
-  position: relative;
+  /* position: relative; */
 
   animation-timing-function: ease-out;
   animation: fade-in-mobile 700ms 1;
@@ -16,7 +16,7 @@
   color: #e3c4a8;
 }
 
-.GO-header {
+.MenuMobile-GO-header {
   font-size: 14em;
   margin: 23% auto 0;
 }
@@ -57,14 +57,42 @@
   transform: scale(1.2);
 }
 
-footer {
+@media (max-width: 480px) {
+  .MenuMobile-GO-header {
+    font-size: 10em;
+    margin: 25% auto 0;
+  }
+
+  .MenuMobile-board-type {
+    width: 90px;
+    height: 90px;
+    font-size: 2em;
+  }
+}
+
+.MenuMobile footer {
+  /* transition: all 2000ms ease-in-out; */
   color: #e3c4a8;
-  position: absolute;
+  position: fixed;
+  width: 100%;
+  /* top: expression(
+    (
+        0- (footer.offsetHeight)+
+          (
+            document.documentElement.clientHeight ?
+              document.documentElement.clientHeight: document.body.clientHeight
+          )+ (ignoreMe = document.documentElement.scrollTop ?
+              document.documentElement.scrollTop: document.body.scrollTop)
+      )+"px"
+  ); */
+
   bottom: 10px;
-  left: 0;
-  right: 0;
+  /* left: 0;
+  right: 0; */
   text-align: center;
-  /* margin: 0 auto 0; */
+  margin: 0 auto 0;
+
+  overflow: hidden;
 }
 
 @keyframes fade-in-mobile {

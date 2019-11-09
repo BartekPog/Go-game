@@ -138,6 +138,7 @@ class Game extends React.Component {
             }}
           />
         </div>
+        <footer>© Bartłomiej Pogodziński 2019</footer>
       </div>
     );
   }

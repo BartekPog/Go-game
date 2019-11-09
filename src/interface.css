@@ -1,9 +1,18 @@
 .Interface {
   background-color: #33313b;
   width: 100vw;
-  height: 100vh;
+  /* max-height: -webkit-fill-available; */
+  height: 100%;
   overflow: hidden;
-  min-height: 100%;
+  /* min-height: 100%; */
 
   text-align: center;
+}
+
+* {
+  box-sizing: border-box;
+}
+*:before,
+*:after {
+  box-sizing: border-box;
 }
