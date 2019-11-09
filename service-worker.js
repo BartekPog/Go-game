@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/Go-game/precache-manifest.148c7f62e0fcc84a891e08aa04eea1d3.js"
+  "/Go-game/precache-manifest.1fca90353e5a988c57d7a5314b0b79bb.js"
 );
 
 self.addEventListener('message', (event) => {
