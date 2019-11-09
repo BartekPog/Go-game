@@ -1,18 +1,18 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "d68787d5fbbad8f847254916aa48b0f0",
+    "revision": "33a1d0c561dd950f450004320ba4ff3f",
     "url": "/Go-game/index.html"
   },
   {
-    "revision": "bb0e9dbf4d01cf996fb2",
-    "url": "/Go-game/static/css/main.c7c5eb94.chunk.css"
+    "revision": "d7aefcc608480ea03c23",
+    "url": "/Go-game/static/css/main.70a90036.chunk.css"
   },
   {
     "revision": "f22b53fed6902beb72c6",
     "url": "/Go-game/static/js/2.9bbeef80.chunk.js"
   },
   {
-    "revision": "bb0e9dbf4d01cf996fb2",
+    "revision": "d7aefcc608480ea03c23",
     "url": "/Go-game/static/js/main.ac372df7.chunk.js"
   },
   {
