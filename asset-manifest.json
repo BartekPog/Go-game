@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/Go-game/static/css/main.5b23d24f.chunk.css",
+    "main.css": "/Go-game/static/css/main.f7f5ab07.chunk.css",
     "main.js": "/Go-game/static/js/main.ac372df7.chunk.js",
     "main.js.map": "/Go-game/static/js/main.ac372df7.chunk.js.map",
     "runtime~main.js": "/Go-game/static/js/runtime~main.f52b1d83.js",
@@ -8,8 +8,8 @@
     "static/js/2.9bbeef80.chunk.js": "/Go-game/static/js/2.9bbeef80.chunk.js",
     "static/js/2.9bbeef80.chunk.js.map": "/Go-game/static/js/2.9bbeef80.chunk.js.map",
     "index.html": "/Go-game/index.html",
-    "precache-manifest.df9b5c9e9e0b7d1cd5cc1238797ef0b6.js": "/Go-game/precache-manifest.df9b5c9e9e0b7d1cd5cc1238797ef0b6.js",
+    "precache-manifest.148c7f62e0fcc84a891e08aa04eea1d3.js": "/Go-game/precache-manifest.148c7f62e0fcc84a891e08aa04eea1d3.js",
     "service-worker.js": "/Go-game/service-worker.js",
-    "static/css/main.5b23d24f.chunk.css.map": "/Go-game/static/css/main.5b23d24f.chunk.css.map"
+    "static/css/main.f7f5ab07.chunk.css.map": "/Go-game/static/css/main.f7f5ab07.chunk.css.map"
   }
 }
