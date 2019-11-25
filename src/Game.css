@@ -3,7 +3,7 @@
   height: 100vh;
 
   animation-timing-function: ease-out;
-  animation: fade-in 700ms 1;
+  animation: fade-in 700ms;
   transition: all 700ms ease-in-out;
 
   display: grid;

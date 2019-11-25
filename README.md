@@ -1,8 +1,10 @@
 # GO
 
-This is a website dedicated to play GO game locally. You can acces it [here](https://bartekpog.github.io/Go-game/).
+This is a website dedicated to play GO game locally:
 
-### What is go?
+![](/assets/capture.gif)
+
+### What is GO?
 
 Go is an old chineese game - it is thought to be the oldest board game continously played to present day. It has simple rules, but the possibilities and it's consequences are very complex. It is usually compared to chess. This game is a great way to spend some quality time with your peers or siblings. You can read more about it on [Wikipedia](<https://en.wikipedia.org/wiki/Go_(game)>).
 
@@ -16,9 +18,9 @@ This project was created due to lack of proper GO online platform on chineese ru
 
 - [x] Add main game mechanics
 - [x] Finish styling for desktop
-- [ ] Finish styling for mobile devices
+- [x] Finish styling for mobile devices
+- [x] Add gif presenting the game to readme
 - [ ] Add custom favicon
-- [ ] Add capturing gifs to readme
 - [ ] Add tests for game mechanics
 - [ ] Add visualisation of conquered fields in game results screen
 
