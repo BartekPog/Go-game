@@ -14,7 +14,7 @@ This project was created due to lack of proper GO online platform on chineese ru
 
 ## Development
 
-**NOTE**: This is project is not yet finished. There are a couple things left to do:
+There are a couple things left to do:
 
 - [x] Add main game mechanics
 - [x] Finish styling for desktop
